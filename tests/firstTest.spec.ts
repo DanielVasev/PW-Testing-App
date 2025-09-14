@@ -1,4 +1,4 @@
-import { test } from '@playwright/test'
+import { test, expect } from '@playwright/test'
 
 test.beforeEach(async ({ page }) => {
     await page.goto("http://localhost:4200/pages/forms/layouts")
@@ -63,8 +63,42 @@ test("user facing locators", async ({ page }) => {
     //await page.getByTitle('IoT Dashboard').click()
 })
 
-test('Locating by using child elements', async ({ page }) => {
+test.skip('Locating by using child elements', async ({ page }) => {
 
     await page.locator('//span[contains(.,"Option 1")]').click()
+
+    // a few elements in one call 
+    //await page.locator('nb-card').locator('nb-radio').locator(':text-is("Option 2")').click()
+    //await page.getByPlaceholder('Message').click()
+
+})
+
+test.skip('Using parents element', async ({ page }) => {
+
+    await page.locator('nb-card').locator('nb-card-header').getByText("Using the Grid").click()
+
+})
+
+test('reusing locators', async ({ page }) => {
+
+    // adding code to the variables 
+    const clickOnUsingTheGreed = page.locator('nb-card').locator('nb-card-header').getByText("Using the Grid")
+    await clickOnUsingTheGreed.click()
+
+})
+
+test('extracting values', async ({ page }) => {
+    // we want to extract data from elements 
+
+    // we assign most of the code to the variable 
+    const labelBasicForm = page.locator('//html/body/ngx-app/ngx-pages/ngx-one-column-layout/nb-layout/div/div/div/div/div/nb-layout-column/ngx-form-elements/ngx-form-layouts/div[2]/div[2]/nb-card[1]/nb-card-header')
+
+    // reusing the variable and clicking on the label
+    await labelBasicForm.click()
+    const buttonText = await labelBasicForm.textContent()
+
+    // Simulating error 
+    expect(buttonText).toEqual("Basic form")
+
 
 })
