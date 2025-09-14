@@ -88,7 +88,7 @@ test('reusing locators', async ({ page }) => {
 })
 
 test('extracting values', async ({ page }) => {
-    // we want to extract data from elements 
+    /* // we want to extract data from elements 
 
     // we assign most of the code to the variable 
     const labelBasicForm = page.locator('//html/body/ngx-app/ngx-pages/ngx-one-column-layout/nb-layout/div/div/div/div/div/nb-layout-column/ngx-form-elements/ngx-form-layouts/div[2]/div[2]/nb-card[1]/nb-card-header')
@@ -98,7 +98,31 @@ test('extracting values', async ({ page }) => {
     const buttonText = await labelBasicForm.textContent()
 
     // Simulating error 
-    expect(buttonText).toEqual("Basic form")
+    expect(buttonText).toEqual("Basic form") */
 
+    // extracting data from all of the buttons 
+    /* const textAllOfTheRadioBtn = await page.locator('nb-radio').allTextContents()
+    expect(textAllOfTheRadioBtn).toContain("Option 1") */
+
+    //Ading element in array and validating them 
+    const textAllOfTheRadioBtn = await page.locator('nb-radio').allTextContents()
+
+})
+
+test('input values to the fields', async ({ page }) => {
+
+    const elementJoe = page.getByRole('textbox', { name: "Email" })
+    await page.getByPlaceholder('Jane Doe').fill('Hello Dani!')
+
+    const fieldText = await page.getByPlaceholder('Jane Doe').inputValue()
+    console.log(fieldText)
+    expect(fieldText).toContain('Hello Dani!')
+
+    // how to validate atribute value getAttribute('')
+
+    const elementAttribute = page.getByPlaceholder('Jane Doe')
+    const placeholderValue = await elementAttribute.getAttribute('placeholder')
+    expect(placeholderValue).toContain('Jane Doe')
+    //console.log(elementAttribute) 
 
 })
