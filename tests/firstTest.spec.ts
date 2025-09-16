@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test'
+import { text } from 'stream/consumers'
 
 test.beforeEach(async ({ page }) => {
     await page.goto("http://localhost:4200/pages/forms/layouts")
@@ -70,13 +71,11 @@ test.skip('Locating by using child elements', async ({ page }) => {
     // a few elements in one call 
     //await page.locator('nb-card').locator('nb-radio').locator(':text-is("Option 2")').click()
     //await page.getByPlaceholder('Message').click()
-
 })
 
 test.skip('Using parents element', async ({ page }) => {
 
     await page.locator('nb-card').locator('nb-card-header').getByText("Using the Grid").click()
-
 })
 
 test('reusing locators', async ({ page }) => {
@@ -84,7 +83,6 @@ test('reusing locators', async ({ page }) => {
     // adding code to the variables 
     const clickOnUsingTheGreed = page.locator('nb-card').locator('nb-card-header').getByText("Using the Grid")
     await clickOnUsingTheGreed.click()
-
 })
 
 test('extracting values', async ({ page }) => {
@@ -106,7 +104,6 @@ test('extracting values', async ({ page }) => {
 
     //Ading element in array and validating them 
     const textAllOfTheRadioBtn = await page.locator('nb-radio').allTextContents()
-
 })
 
 test('input values to the fields', async ({ page }) => {
@@ -124,5 +121,21 @@ test('input values to the fields', async ({ page }) => {
     const placeholderValue = await elementAttribute.getAttribute('placeholder')
     expect(placeholderValue).toContain('Jane Doe')
     //console.log(elementAttribute) 
+})
+test('Assertions', async ({ page }) => {
+    //General assertion 
+    /* const value = 5
+    expect(value).toBeTruthy(5)*/
 
+    //Assert text in btn 
+    const element = page.locator('//html/body/ngx-app/ngx-pages/ngx-one-column-layout/nb-layout/div/div/div/div/div/nb-layout-column/ngx-form-elements/ngx-form-layouts/div[2]/div[2]/nb-card[1]/nb-card-body/form/button')
+    const text = await element.textContent()
+    expect(text).toEqual('Submit')
+
+    //Assert element text 
+    await expect(element).toHaveText('Submit')
+
+    //Soft assertion 
+    await expect.soft(element).toHaveText('Submitted') // notify for the difference in the assertion, but still will continue the test and click on the button 'Submit'
+    await element.click()
 })
