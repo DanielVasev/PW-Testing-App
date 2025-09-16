@@ -31,7 +31,6 @@ test('auto Waiting', async ({ page }) => {
 
     // assign dedicated timout
     //await expect(successBtn).toHaveText('Data loaded with AJAX get request.', { timeout: 10000 })
-
 })
 
 test('Alternative waits', async ({ page }) => {
@@ -54,4 +53,13 @@ test('Waithing for specific response ', async ({ page }) => {
     // validating the text is as expected 
     await expect(text).toContain('Data loaded with AJAX get request.')
 })
+test('timouts', async ({ page }) => {
 
+    const successBtn = page.locator('.bg-success')
+    //test.slow will increace the deff timout 3 times 
+    test.slow()
+    await successBtn.click()
+
+
+
+})

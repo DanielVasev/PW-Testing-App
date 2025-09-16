@@ -26,7 +26,7 @@ test.describe("second suite 'Auth'", () => {
 // Locators by role 
 
 test("user facing locators", async ({ page }) => {
-    await page.getByRole("textbox", { name: "Email" }).first().click()
+    await page.getByRole//("textbox", { name: "Email" }).first().click()
     await page.getByRole("button", { name: "Sign in" }).first().click()
 
     // Get by Text 
