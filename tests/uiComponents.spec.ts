@@ -38,16 +38,41 @@ test.describe("Form Layout Page", () => {
     })
 
     test("Radio Btn's", async ({ page }) => {
-        //Navigating to the main form 
-        //const usingTheGridForm = page.locator('nb-card', { hasText: "Using the Grid" })
-        const usingTheGridForm = page.locator('nb-card', { hasText: "Using the Grid" })
+        //Navigating to radio selector option 1....2.. 
+        const navigateToRadioOption1 = page.locator('nb-card', { hasText: "Using the Grid" }).getByRole('radio', { name: "Option 1" })
+        const navigateToRadioOption2 = page.locator('nb-card', { hasText: "Using the Grid" }).getByRole('radio', { name: "Option 2" })
 
-        // Navigate to checkbox 1 and selecting it 
-        //await usingTheGridForm.getByLabel('Option 1').check({ force: true })// in case the element is hiden we can use "force:true" to overrigd the action 
+        // click on radio Option 1 
+        const clickOnRadioOption1 = await navigateToRadioOption1.click({ force: true })
+        const clickOnRadioOption2 = await navigateToRadioOption2.click({ force: true })
 
-        await usingTheGridForm.getByRole('radio', { name: "Option 1" }).click({ force: true })
+        //Check if the Radio is selected 
+        await navigateToRadioOption1.isChecked()
 
+        //Assertion if is checked 
+        expect(navigateToRadioOption1).toBeTruthy()
+
+        // second way of validating is 
+        await expect(navigateToRadioOption2).toBeChecked()
+
+        //check if the selection is falce 
+        //await expect(navigateToRadioOption1).toBeFalsy()
+    })
+
+    test('working with checkboxes', async ({ page }) => {
+        await page.getByText('Modal & Overlays').click()
+        await page.getByText('Toastr').click()
+
+        //check element is visible 
+        await page.getByText('Hide on click').isVisible()
+        //click the checkbox 
+        await page.getByRole('checkbox', { name: 'Hide on Click' }).click({ force: true })
+
+        //Alternative for Force comand 
+        /* await page.getByRole('checkbox', { name: 'Hide on Click' }).waitFor({ state: 'visible' })
+        await page.getByRole('checkbox', { name: 'Hide on Click' }).click() */
 
 
     })
+
 })
