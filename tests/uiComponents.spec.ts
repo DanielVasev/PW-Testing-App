@@ -68,11 +68,64 @@ test.describe("Form Layout Page", () => {
         //click the checkbox 
         await page.getByRole('checkbox', { name: 'Hide on Click' }).click({ force: true })
 
+        // confirm that the checkbox is unchecked 
+        await page.getByRole('checkbox', { name: 'Hide on Click' }).isChecked()
+        //await page.getByRole('checkbox', { name: 'Hide on Click' }).uncheck()
+
+        // check the status for all of the checkboxes 
+        const locatorAllCheckBoxes = await page.getByRole('checkbox')
+
+        for (const box of await locatorAllCheckBoxes.all()) {
+
+            //Option to click and unclick all of the radio 
+            //await box.check({ force: true })
+            await box.uncheck({ force: true })
+            expect(box.check()).toBeTruthy()
+        }
+
         //Alternative for Force comand 
         /* await page.getByRole('checkbox', { name: 'Hide on Click' }).waitFor({ state: 'visible' })
         await page.getByRole('checkbox', { name: 'Hide on Click' }).click() */
+    })
+
+    test('Lists and Dropdowns', async ({ page }) => {
+        const dropDownMenu = page.locator('ngx-header nb-select')
+        await dropDownMenu.click()
+
+        //page.getByRole('list')// We using it when the list has a UL tag 
+        //page.getByRole('listitem') // Using it when the list has a LI tag 
+
+        //first way of getting the list elements 
+        //const listElements = page.getByRole('list').locator('nb-option')
+
+        //second way 
+        const listElement = page.locator('nb-option-list nb-option')
+        //assert all list elements are available 
+        await expect(listElement).toHaveText(["Light", "Dark", "Cosmic", "Corporate"])
+
+        //select individual element 
+        await listElement.filter({ hasText: 'Cosmic' }).click()
+
+        //define header element 
+        const header = page.locator('nb-layout-header')
+        await expect(header).toHaveCSS('background-color', 'rgb(50, 50, 89)')
+
+        //validating all of the colours are set properly 
+        const colors = {
+            "Light": "rgb(255, 255, 255)",
+            "Dark": "rgb(34, 43, 69)",
+            "Cosmic": "rgb(50, 50, 89)",
+            "Corporate": "rgb(255, 255, 255)"
+        }
+
+        for (const color in colors) {
+            await listElement.filter({ hasText: color }).click()
+            //await expect(header).toHaveCSS('background-color', colors[color])
+
+        }
 
 
     })
 
-})
+
+})  
