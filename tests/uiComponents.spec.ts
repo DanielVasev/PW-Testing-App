@@ -147,6 +147,8 @@ test.describe("Form Layout Page", () => {
         const tempGuage = page.locator('nb-tab ngx-temperature-dragger')
         await tempGuage.hover({ force: true })
 
+
+
         //mouse movment 
 
 
