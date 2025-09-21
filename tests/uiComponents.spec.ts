@@ -118,11 +118,41 @@ test.describe("Form Layout Page", () => {
             "Corporate": "rgb(255, 255, 255)"
         }
 
+
+        await dropDownMenu.click()
+        //will select each option and validate them 
         for (const color in colors) {
             await listElement.filter({ hasText: color }).click()
-            //await expect(header).toHaveCSS('background-color', colors[color])
-
+            await expect(header).toHaveCSS('background-color', colors[color])
+            await dropDownMenu.click()
         }
+    })
+
+    test('tooltips', async ({ page }) => {
+
+        //Navigate to the requared page 
+        await page.getByText('Modal & Overlays').click()
+        await page.getByText('Tooltip').click()
+
+        //Create a variable to hold the locator for the tooltip 
+        const tooltipCard = page.locator('//html/body/ngx-app/ngx-pages/ngx-one-column-layout/nb-layout/div[1]/div/div/div/div/nb-layout-column/ngx-modal-overlays/ngx-tooltip/div/div[2]/nb-card/nb-card-body/button[1]')
+
+        //over over the element 
+        await tooltipCard.hover()
+    })
+
+    test('sliders', async ({ page }) => {
+        //case: we have a slider which can adjust from 0 to 30 degreece... lets adjust the slider to 30C and validate the number
+        await page.getByText('Iot Dashboard').click()
+        const tempGuage = page.locator('nb-tab ngx-temperature-dragger')
+        await tempGuage.hover({ force: true })
+
+        //mouse movment 
+
+
+
+
+
 
 
     })
