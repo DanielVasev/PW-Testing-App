@@ -1,12 +1,13 @@
 import { Locator, Page } from "@playwright/test"
+import { HelperBase } from "./helperBase"
 
-export class NavigationPage {
-
-    readonly page: Page
+export class NavigationPage extends HelperBase {
 
     constructor(page: Page) {
-        this.page = page
+        super(page)
     }
+
+
     ////// Other way to organise the locators / check the locators for Auth section down 
     /*    readonly sideMenuAuthElement: Locator
        readonly loginMenuItem: Locator
@@ -48,9 +49,14 @@ export class NavigationPage {
        } */
 
     //Mthod to navigate and click on elements in the side menu 
+    /**
+     * Will Navigate to Form Layour page
+     */
     async formLayoutsPage() {
         await this.page.getByText('Forms').click()
         await this.page.getByText('Form Layouts').click()
+        // added methid for wait check in the helperBase file 
+        await this.waitForNumberOfSeconds(5)
     }
 
     // Navigate to Datepicker 
@@ -112,6 +118,5 @@ export class NavigationPage {
         await this.page.getByText('Tables & Data').click()
         await this.page.getByText('Tree Grid').click()
     }
-
 
 }

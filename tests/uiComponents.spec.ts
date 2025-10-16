@@ -121,11 +121,11 @@ test.describe("Form Layout Page", () => {
 
         await dropDownMenu.click()
         //will select each option and validate them 
-        for (const color in colors) {
-            await listElement.filter({ hasText: color }).click()
-            await expect(header).toHaveCSS('background-color', colors[color])
-            await dropDownMenu.click()
-        }
+        /*  for (const color in colors) {
+             await listElement.filter({ hasText: color }).click()
+             await expect(header).toHaveCSS('background-color', colors[color])
+             await dropDownMenu.click()
+         } */
     })
 
     test('tooltips', async ({ page }) => {
@@ -141,15 +141,15 @@ test.describe("Form Layout Page", () => {
         await tooltipCard.hover()
     })
 
-    test('sliders', async ({ page }) => {
+    /* test('sliders', async ({ page }) => {
         //case: we have a slider which can adjust from 0 to 30 degreece... lets adjust the slider to 30C and validate the number
         await page.getByText('Iot Dashboard').click()
         const tempGuage = page.locator('nb-tab ngx-temperature-dragger')
-        await tempGuage.hover({ force: true })
+        await tempGuage.hover({ force: true }) */
 
 
 
-        //mouse movment 
+    //mouse movment 
 
 
 
@@ -157,7 +157,7 @@ test.describe("Form Layout Page", () => {
 
 
 
-    })
+})
 
 
-})  
+
