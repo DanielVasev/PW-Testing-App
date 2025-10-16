@@ -1,4 +1,10 @@
 'use strict'
+//import { juiceMaker } from '../otherHelpers/otherHelper'
+
+
+
+
+
 //JS Fundamental
 
 //===========================================       // VARIABLES                                                            
@@ -78,10 +84,77 @@ if ( hour <= 22 && hour >=23){
 
 // FOR LOOP 
 
-for(let i = 0; i <=10; i++){
-    console.log(i);
+/* for(let i = 0; i <=10; i++){
+    console.log("Hello " + i);
+} */
+
+                                                    // Loop array 
+
+/* let cars = ["volvo", "Audi", "Tata", "Lada"]
+
+for(let car in cars){
+    console.log(car + " " + cars[car]);
+} */
+
+//===========================================       // Functions 
+
+//ver1.
+/* function hello1(){
+    console.log("Hello One")
 }
 
+hello1()
 
+//ver 2 
 
+function calcAge(curYear, yearBorn){
+    const age = curYear - yearBorn
+    return age
+}
+console.log(calcAge(2025,1982));
 
+//ver3. 
+
+let ageCalculator = function(curYear, yearBorn){
+    const age = curYear - yearBorn
+    return age
+}
+console.log(ageCalculator(2025,1982));
+
+//const juice1 = juiceMaker(3,5) */
+
+//===========================================       // Classes and Methods 
+
+class CustomerDetails{
+    printFirstName(firstName){
+        console.log(firstName)
+    }
+
+    printSecondName(secondName){
+        console.log(secondName)
+
+    }
+
+    printCustomerAge(birthdayYear){
+        let currentAge = 2025 - birthdayYear
+        console.log(currentAge)
+    }
+
+    /* printSecondName(secondName){
+        printSecondName(secondName){
+            console.log(secondName)
+        }
+        
+    }
+
+    customerAge(birthDay){
+        let currentAge = 2025 - birthDay
+        console.log(currentAge);
+    } */
+}
+
+let customerDetail = new CustomerDetails()
+
+customerDetail.printFirstName("Daniel")
+customerDetail.printSecondName("Vasev")
+customerDetail.printCustomerAge(1982)
